@@ -1,4 +1,21 @@
-document.body.append("hi")
+import "./style.css";
+
+const app = document.getElementById("app") as HTMLDivElement;
+const room = document.getElementById("room") as HTMLDivElement;
+
+
+document.getElementById("button-enter")?.addEventListener("click", () => {
+  room.style.display = "flex";
+  setTimeout(() => {
+    room.style.opacity = "1";
+  }, 100);
+})
+document.getElementById("button-out")?.addEventListener("click", () => {
+  room.style.opacity = "0";
+  setTimeout(() => {
+    room.style.display = "none";
+  }, 1000);
+})
 
 // import * as d3 from "d3";
 // import data from "./graph.json"
