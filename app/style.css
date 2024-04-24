@@ -1,4 +1,21 @@
 @import url("https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=VT323&display=swap");
+@keyframes shake {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-3deg);
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+  75% {
+    transform: rotate(3deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
 
 html {
   width: 100vw;
@@ -49,7 +66,7 @@ img {
   z-index: 10;
 
   box-sizing: border-box;
-  padding: 0px 30px 10px 30px;
+  padding: 0px 30px 17px 30px;
 
   display: flex;
   flex-direction: row;
@@ -67,7 +84,7 @@ img {
   height: auto;
 }
 .buttonImg {
-  height: 50px;
+  height: 45px;
   width: auto;
 }
 
@@ -83,15 +100,19 @@ img {
 
   position: relative;
   cursor: pointer;
+
+  &:hover {
+    animation: 0.2s infinite shake;
+  }
 }
 .buttonTitle {
   font-size: 17px;
   color: black;
 }
-.rightButtonWrapper {
+
+.buttonWrapper {
   position: absolute;
-  top: 55px;
-  right: 40px;
+  top: 64px;
 
   display: flex;
   flex-direction: row;
@@ -100,6 +121,12 @@ img {
 
   gap: 10px;
   z-index: 20;
+}
+.buttonWrapper.right {
+  right: 40px;
+}
+.buttonWrapper.left {
+  left: 40px;
 }
 
 .digitWrapper {
@@ -117,10 +144,10 @@ img {
   transform: translate(-53%, 0px);
 }
 .digitNum {
-  width: 24px;
+  width: 20px;
 
   color: #f03025;
-  font-size: 40px;
+  font-size: 35px;
   line-height: 0.6;
 
   font-family: "Silkscreen", sans-serif;

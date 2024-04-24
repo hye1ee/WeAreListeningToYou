@@ -26,15 +26,26 @@ const getDataById = async (id: number) => {
   });
 }
 
+const updateDigit = (digit: number) => {
+  const newDigit = `000${digit}`.slice(-3);
+
+  const digit0 = document.getElementById("digit0") as HTMLDivElement;
+  const digit1 = document.getElementById("digit1") as HTMLDivElement;
+  const digit2 = document.getElementById("digit2") as HTMLDivElement;
+  digit0.innerText = newDigit.charAt(newDigit.length - 1);
+  digit1.innerText = newDigit.charAt(newDigit.length - 2);
+  digit2.innerText = newDigit.charAt(newDigit.length - 3);
+}
+
 onValue(ref(db, "/dataNum"), async (snapshot) => {
   const newDataNum = snapshot.val();
-  if (dataNum === newDataNum) return;
 
   for (; dataNum < newDataNum; dataNum++) {
     const newItem = await getDataById(dataNum);
     console.log("Detect new item, with id: ", dataNum, "data: ", newItem);
     document.body.append(new Duck().item);
   }
+  updateDigit(dataNum);
 })
 
 
