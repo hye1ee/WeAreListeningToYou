@@ -1,14 +1,50 @@
+import { initializeApp } from "firebase/app";
+import { getDatabase, increment, ref, set, update, onValue, get, child } from "firebase/database";
+
+import Connector from "./connector";
 import Duck from "./duck";
 import "./style.css";
 
-const Duck1 = new Duck();
-const Duck2 = new Duck();
-const Duck3 = new Duck();
+const firebaseConfig = JSON.parse(import.meta.env.VITE_FIREBASE_CONFIG);
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+let dataNum = 0;
 
-document.body.append(Duck1.item, Duck2.item, Duck3.item);
+const getDataById = async (id: number) => {
+  return new Promise<any>((res, rej) => {
+    get(child(ref(db), "data/" + id)).then((snapshot) => {
+      if (snapshot.exists()) {
+        res(snapshot.val());
+      } else {
+        alert("Database Error, Please reload the website");
+        rej();
+      }
+    }).catch((error) => {
+      console.error(error);
+      rej();
+    });
+  });
+}
 
-document.getElementById("button-record")?.addEventListener("click", () => {
+onValue(ref(db, "/dataNum"), async (snapshot) => {
+  const newDataNum = snapshot.val();
+  if (dataNum === newDataNum) return;
 
+  for (; dataNum < newDataNum; dataNum++) {
+    const newItem = await getDataById(dataNum);
+    console.log("Detect new item, with id: ", dataNum, "data: ", newItem);
+    document.body.append(new Duck().item);
+  }
+})
+
+
+document.getElementById("button-record")?.addEventListener("click", async () => {
+  const { location, date } = await Connector.getInstance().startRecord();
+  set(ref(db, '/data/' + dataNum), {
+    location: location,
+    date: date,
+  });
+  update(ref(db), { "/dataNum": increment(1) });
 })
 
 

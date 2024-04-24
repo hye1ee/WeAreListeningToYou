@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=VT323&display=swap");
+
 html {
   width: 100vw;
   height: 100vh;
@@ -15,6 +17,10 @@ body {
   position: relative;
   overflow: hidden;
   background-color: #c2e2ff;
+
+  font-family: "VT323", monospace;
+  font-weight: 400;
+  font-style: normal;
 }
 img {
   width: 100%;
@@ -32,6 +38,96 @@ img {
 
   color: white;
 }
+
+#header {
+  width: 100%;
+  height: 100px;
+
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 10;
+
+  box-sizing: border-box;
+  padding: 0px 30px 10px 30px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+.headerImg {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: -1;
+}
+.logoImg {
+  width: 300px;
+  height: auto;
+}
+.buttonImg {
+  height: 50px;
+  width: auto;
+}
+
+.buttonContainer {
+  width: fit-content;
+  height: fit-content;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+
+  position: relative;
+  cursor: pointer;
+}
+.buttonTitle {
+  font-size: 17px;
+  color: black;
+}
+.rightButtonWrapper {
+  position: absolute;
+  top: 55px;
+  right: 40px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+  z-index: 20;
+}
+
+.digitWrapper {
+  width: fit-content;
+  height: fit-content;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  position: absolute;
+  left: 50%;
+  top: 10px;
+  transform: translate(-53%, 0px);
+}
+.digitNum {
+  width: 24px;
+
+  color: #f03025;
+  font-size: 40px;
+  line-height: 0.6;
+
+  font-family: "Silkscreen", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
 #room {
   width: 100%;
   height: 100%;

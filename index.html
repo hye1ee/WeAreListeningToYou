@@ -8,8 +8,26 @@
   </head>
   <body>
     <div id="app">
-      <div>WeAreListeningToYou</div>
-      <button id="button-record">Start</button>
+      <div id="header">
+        <img class="headerImg" src="/header.png" />
+        <img class="logoImg" src="/logo.png" />
+        <button id="button-record">Start</button>
+      </div>
+      <div class="rightButtonWrapper">
+        <div class="buttonContainer">
+          <img class="buttonImg" src="/connectIcon.png" />
+          <div class="buttonTitle">Connect</div>
+        </div>
+        <div class="buttonContainer">
+          <div class="digitWrapper digit">
+            <div class="digitNum">0</div>
+            <div class="digitNum">0</div>
+            <div class="digitNum">7</div>
+          </div>
+          <img class="buttonImg" src="/connectionIcon.png" />
+          <div class="buttonTitle">Connection</div>
+        </div>
+      </div>
     </div>
     <script type="module" src="/app/main.ts"></script>
   </body>

@@ -2,6 +2,7 @@ const INCREMENT = 1;
 
 class Duck {
   item: HTMLDivElement;
+  img: HTMLDivElement;
   maxX: number = 0;
   maxY: number = 0;
   x: number = 0;
@@ -14,9 +15,10 @@ class Duck {
     const DuckWrapper = document.createElement("div");
     DuckWrapper.className = "duckWrapper"
     const DuckImg = document.createElement("img");
-    DuckImg.src = "/duck1.png"
+    DuckImg.src = `/duck${Math.floor(Math.random() * 10) + 1}.png`
 
     DuckWrapper.append(DuckImg);
+    this.img = DuckImg;
     this.item = DuckWrapper;
     this.init();
   }
@@ -68,6 +70,9 @@ class Duck {
   }
 
   updatePos() {
+    if (this.moveX > 0) this.img.style.transform = "scaleX(-1)";
+    else this.img.style.transform = "";
+
     this.item.style.transform = `translate(${this.x}px, ${this.y}px)`;
   }
 
