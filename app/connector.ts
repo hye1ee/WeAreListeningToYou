@@ -3,7 +3,7 @@ import { connect } from 'extendable-media-recorder-wav-encoder';
 import axios from "axios";
 import { DataChunk } from "./utils";
 
-const CONNECTION_TIME = 10000; // in ms
+const CONNECTION_TIME = 30000; // in ms
 
 class Connector {
   private static instance: Connector;
