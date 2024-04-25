@@ -1,5 +1,3 @@
-import OpenAI from "openai";
-
 import { MediaRecorder, register } from 'extendable-media-recorder';
 import { connect } from 'extendable-media-recorder-wav-encoder';
 import axios from "axios";
