@@ -2,10 +2,6 @@ const language = require('@google-cloud/language');
 // Creates a client
 const client = new language.LanguageServiceClient();
 
-/**
- * TODO(developer): Uncomment the following line to run this code.
- */
-
 export const getEntities = async (text: string) => {
   const document = {
     content: text,
