@@ -1,4 +1,4 @@
-const language = require('@google-cloud/language').v2;
+const language = require('@google-cloud/language');
 // Creates a client
 const client = new language.LanguageServiceClient();
 
@@ -11,6 +11,6 @@ export const getEntities = async (text: string) => {
     content: text,
     type: 'PLAIN_TEXT',
   };
-  const [result] = await client.analyzeEntities({ document });
+  const [result] = await client.analyzeEntitySentiment({ document });
   return result.entities;
 }

@@ -180,3 +180,220 @@ img {
 
   cursor: pointer;
 }
+.duckImg {
+  &:hover {
+    animation: 0.2s infinite shake;
+  }
+}
+.duckPath {
+  position: absolute;
+  top: 0px;
+
+  width: 5px;
+  height: 5px;
+
+  background-color: #a2d4fe;
+}
+
+#overlay {
+  width: 100%;
+  height: 100%;
+
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  box-sizing: border-box;
+  padding-bottom: 50px;
+
+  z-index: 50;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+.modalContainer {
+  width: 380px;
+  height: fit-content;
+
+  position: relative;
+}
+.modalTitle {
+  position: absolute;
+  top: 0px;
+  left: 50%;
+
+  color: white;
+  font-size: 20px;
+  transform: translate(-50%, 8px);
+}
+.modalButtonContainer {
+  width: 85px;
+  height: fit-content;
+
+  position: relative;
+  cursor: pointer;
+
+  &:hover {
+    filter: contrast(0.8);
+  }
+}
+.modalButtonTitle {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+
+  color: white;
+  font-size: 17px;
+  transform: translate(-50%, -50%);
+}
+.modalButtonWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+
+  position: absolute;
+  bottom: 0px;
+  left: 50%;
+  transform: translate(-50%, -45px);
+}
+.modalDescription {
+  width: 250px;
+
+  font-size: 18px;
+  line-height: 1.1;
+
+  position: absolute;
+  top: 0px;
+  left: 50%;
+  transform: translate(-50%, 77px);
+}
+.descriptionWrapper {
+  width: fit-content;
+  height: fit-content;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.descriptionCol {
+  width: 190px;
+  height: fit-content;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 8px;
+}
+.descriptionText {
+  width: 100%;
+  height: fit-content;
+
+  font-size: 18px;
+  line-height: 1.1;
+}
+.connectionImg {
+  width: 60px;
+  height: 60px;
+}
+
+.loadingContainer {
+  width: 190px;
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.loadingGauge {
+  width: 178px;
+  height: 17px;
+
+  position: absolute;
+  left: 50%;
+  top: 49%;
+  transform: translate(-50%, -50%);
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 3px;
+}
+.loadingItem {
+  width: 15px;
+  height: 100%;
+  background-color: #274ba9;
+}
+
+.infoWrapper {
+  width: 200px;
+  height: fit-content;
+
+  display: none;
+  position: absolute;
+  left: 110%;
+  top: 20%;
+}
+.infoText {
+  width: 90%;
+
+  position: absolute;
+  left: 50%;
+  top: 48%;
+  transform: translate(-50%, -50%);
+
+  color: #505050;
+}
+
+.wordWrapper {
+  height: 300px;
+
+  display: none;
+  flex-direction: column;
+  flex-wrap: wrap-reverse;
+  gap: 5px;
+
+  position: absolute;
+  right: 110%;
+  top: 50%;
+  transform: translate(0, -50%);
+}
+.wordImg {
+  width: 45px;
+  height: 45px;
+}
+.wordItemWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  position: relative;
+}
+.wordTitle {
+  color: #505050;
+  line-height: 0.8;
+  text-align: center;
+}
+
+.wordInfoWrapper {
+  width: 96px;
+  height: fit-content;
+
+  display: none;
+  position: absolute;
+  left: 60%;
+  bottom: 40%;
+}
+.wordInfoText {
+  font-size: 15px;
+  line-height: 0.8;
+}

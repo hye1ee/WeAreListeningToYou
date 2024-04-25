@@ -1,8 +1,16 @@
+import { DataChunk } from "./utils";
+
 const INCREMENT = 1;
+
+export interface DuckProps extends DataChunk {
+  index: number;
+}
 
 class Duck {
   item: HTMLDivElement;
   img: HTMLDivElement;
+  words: HTMLDivElement | undefined;
+  info: HTMLDivElement | undefined;
   maxX: number = 0;
   maxY: number = 0;
   x: number = 0;
@@ -10,16 +18,26 @@ class Duck {
   moveX: number = 0; // true goes positive
   moveY: number = 0; // false goes negative
   interval: NodeJS.Timeout | undefined;
+  props: DuckProps;
 
-  constructor() {
+  constructor(props: DuckProps) {
     const DuckWrapper = document.createElement("div");
     DuckWrapper.className = "duckWrapper"
-    const DuckImg = document.createElement("img");
-    DuckImg.src = `/duck${Math.floor(Math.random() * 10) + 1}.png`
+    const duckImg = document.createElement("img");
+    duckImg.className = "duckImg"
+    duckImg.src = `/duck${Math.floor(Math.random() * 10) + 1}.png`
 
-    DuckWrapper.append(DuckImg);
-    this.img = DuckImg;
+    // const DuckPath = document.createElement("div");
+    // DuckPath.className = "duckPath"
+
+    DuckWrapper.append(duckImg);
+
+    this.props = props;
+    this.img = duckImg;
     this.item = DuckWrapper;
+
+    this.createInfo();
+    this.createWord();
     this.init();
   }
 
@@ -35,14 +53,91 @@ class Duck {
     this.setMove();
 
     this.item.addEventListener("mouseenter", () => {
-      if (this.interval) {
+      if (this.interval && this.info) {
         clearInterval(this.interval);
         this.interval = undefined;
+        this.info.style.display = "flex";
       }
     })
     this.item.addEventListener("mouseleave", () => {
-      if (!this.interval) this.setMove();
+      if (!this.interval && this.info) {
+        this.setMove();
+        this.info.style.display = "none";
+      }
     })
+    this.item.addEventListener("click", () => {
+      if (!this.words) return;
+
+      if (this.words.style.display === "flex") this.words.style.display = "none";
+      else this.words.style.display = "flex"
+    })
+
+  }
+
+  getOrder() {
+    if (this.props.index === 1) return "1st"
+    else if (this.props.index === 2) return "2nd"
+    else return `${this.props.index}th`
+  }
+
+  createInfo() {
+    const infoWrapper = document.createElement("div");
+    infoWrapper.className = "infoWrapper";
+    const infoText = document.createElement("div");
+    infoText.className = "infoText";
+    infoText.innerText = `${this.getOrder()} Connection\nLocation: ${this.props.location}\nDate: ${this.props.date}`;
+
+    const infoBackground = document.createElement("img");
+    infoBackground.src = "/hoverBackground.png";
+    infoBackground.className = "infoBackground";
+
+    infoWrapper.append(infoText, infoBackground);
+    this.info = infoWrapper;
+    this.item.append(infoWrapper);
+  }
+
+  createWordItem(name: string, score: number, magnitude: number) {
+    const wordItemWrapper = document.createElement("div");
+    wordItemWrapper.className = "wordItemWrapper";
+
+    const wordImg = document.createElement("img");
+    wordImg.src = "/folderImg.png";
+    wordImg.className = "wordImg";
+
+    const wordTitle = document.createElement("div");
+    wordTitle.innerText = name;
+    wordTitle.className = "wordTitle";
+    wordItemWrapper.append(wordImg, wordTitle)
+
+    const wordInfoWrapper = document.createElement("div");
+    wordInfoWrapper.className = "wordInfoWrapper";
+    const wordInfoBackground = document.createElement("img");
+    wordInfoBackground.src = "/hoverSmallBackground.png";
+    const wordInfoText = document.createElement("div");
+    wordInfoText.className = "infoText wordInfoText";
+    wordInfoText.innerText = `Score: ${score.toFixed(1)}\nMagnitude: ${magnitude.toFixed(1)}`;
+    wordInfoWrapper.append(wordInfoBackground, wordInfoText);
+    wordItemWrapper.append(wordInfoWrapper);
+
+    wordItemWrapper.addEventListener("mouseenter", () => {
+      wordInfoWrapper.style.display = "flex";
+    });
+    wordItemWrapper.addEventListener("mouseleave", () => {
+      wordInfoWrapper.style.display = "none";
+    })
+
+    return wordItemWrapper;
+  }
+
+  createWord() {
+    const wordWrapper = document.createElement("div");
+    wordWrapper.className = "wordWrapper";
+
+    this.props.data.forEach((el) => {
+      wordWrapper.append(this.createWordItem(el.name, el.score, el.magnitude));
+    })
+    this.words = wordWrapper;
+    this.item.append(wordWrapper);
   }
 
   setMove() {

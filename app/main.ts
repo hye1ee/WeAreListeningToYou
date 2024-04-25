@@ -4,6 +4,7 @@ import { getDatabase, increment, ref, set, update, onValue, get, child } from "f
 import Connector from "./connector";
 import Duck from "./duck";
 import "./style.css";
+import { DataChunk } from "./utils";
 
 const firebaseConfig = JSON.parse(import.meta.env.VITE_FIREBASE_CONFIG);
 const app = initializeApp(firebaseConfig);
@@ -42,20 +43,25 @@ onValue(ref(db, "/dataNum"), async (snapshot) => {
 
   for (; dataNum < newDataNum; dataNum++) {
     const newItem = await getDataById(dataNum);
-    console.log("Detect new item, with id: ", dataNum, "data: ", newItem);
-    document.body.append(new Duck().item);
+    document.body.append(new Duck({
+      index: dataNum + 1,
+      date: newItem.date,
+      location: newItem.location,
+      data: newItem.data
+    }).item);
   }
   updateDigit(dataNum);
 })
 
 
-document.getElementById("button-record")?.addEventListener("click", async () => {
-  const { location, date } = await Connector.getInstance().startRecord();
-  set(ref(db, '/data/' + dataNum), {
-    location: location,
-    date: date,
-  });
+const uploadData = (data: DataChunk) => {
+  set(ref(db, '/data/' + dataNum), data);
   update(ref(db), { "/dataNum": increment(1) });
+}
+
+
+document.getElementById("button-record")?.addEventListener("click", async () => {
+  Connector.getInstance(uploadData).updateWarningModal();
 })
 
 
