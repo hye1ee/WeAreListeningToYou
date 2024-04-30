@@ -64,6 +64,10 @@ document.getElementById("button-record")?.addEventListener("click", async () => 
   Connector.getInstance(uploadData).updateWarningModal();
 })
 
+document.getElementById("button-about")?.addEventListener("click", () => {
+  window.open("https://www.figma.com/proto/PAG9Ah2Nv7SYyfW1l8LfxK/NYU?page-id=511%3A6&type=design&node-id=603-6008&viewport=1852%2C67%2C0.23&t=RfIfwswZMnqGhTtz-1&scaling=contain&starting-point-node-id=603%3A6008&mode=design")
+})
+
 
 // import * as d3 from "d3";
 // import data from "./graph.json"
